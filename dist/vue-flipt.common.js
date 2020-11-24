@@ -2283,56 +2283,6 @@ module.exports = function (name) {
 
 /***/ }),
 
-/***/ "b635":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var _dollar_flipt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("7f05");
- // Declare install function executed by Vue.use()
-
-function install(Vue, options) {
-  if (install.installed) {
-    return;
-  }
-
-  install.installed = true; // Lazy creation
-
-  if (!Object.prototype.hasOwnProperty.call(Vue, "$flipt")) {
-    Object.defineProperty(Vue.prototype, "$flipt", {
-      get: function get() {
-        if (!this.$_flipt) {
-          this.$_flipt = new _dollar_flipt__WEBPACK_IMPORTED_MODULE_0__[/* DollarFlipt */ "a"](options);
-        }
-
-        return this.$_flipt;
-      }
-    });
-  }
-} // Create module definition for Vue.use()
-
-
-var plugin = {
-  install: install,
-  version: "0.1.0"
-}; // Auto-install when vue is found (eg. in browser via <script> tag)
-
-var GlobalVue = null;
-
-if (typeof window !== "undefined") {
-  GlobalVue = window.Vue;
-} else if (typeof global !== "undefined") {
-  GlobalVue = global.Vue;
-}
-
-if (GlobalVue) {
-  GlobalVue.use(plugin);
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (plugin);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("c8ba")))
-
-/***/ }),
-
 /***/ "c04e":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3174,13 +3124,13 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// EXTERNAL MODULE: ./src/index.js
-var src_0 = __webpack_require__("b635");
+// EXTERNAL MODULE: ./src/plugin.js
+var src_plugin = __webpack_require__("fe83");
 
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
 
 
-/* harmony default export */ var entry_lib = __webpack_exports__["default"] = (src_0["a" /* default */]);
+/* harmony default export */ var entry_lib = __webpack_exports__["default"] = (src_plugin["a" /* default */]);
 
 
 
@@ -3211,6 +3161,56 @@ module.exports = NATIVE_SYMBOL
   // eslint-disable-next-line no-undef
   && typeof Symbol.iterator == 'symbol';
 
+
+/***/ }),
+
+/***/ "fe83":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var _dollar_flipt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("7f05");
+ // Declare install function executed by Vue.use()
+
+function install(Vue, options) {
+  if (install.installed) {
+    return;
+  }
+
+  install.installed = true; // Lazy creation
+
+  if (!Object.prototype.hasOwnProperty.call(Vue, "$flipt")) {
+    Object.defineProperty(Vue.prototype, "$flipt", {
+      get: function get() {
+        if (!this.$_flipt) {
+          this.$_flipt = new _dollar_flipt__WEBPACK_IMPORTED_MODULE_0__[/* DollarFlipt */ "a"](options);
+        }
+
+        return this.$_flipt;
+      }
+    });
+  }
+} // Create module definition for Vue.use()
+
+
+var plugin = {
+  install: install,
+  version: "0.1.0"
+}; // Auto-install when vue is found (eg. in browser via <script> tag)
+
+var GlobalVue = null;
+
+if (typeof window !== "undefined") {
+  GlobalVue = window.Vue;
+} else if (typeof global !== "undefined") {
+  GlobalVue = global.Vue;
+}
+
+if (GlobalVue) {
+  GlobalVue.use(plugin);
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (plugin);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("c8ba")))
 
 /***/ }),
 

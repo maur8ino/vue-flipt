@@ -13,6 +13,11 @@ export default {
   components: {
     HelloWorld,
   },
+  async mounted() {
+    const flag = await this.$flipt.evaluate();
+    console.log(flag);
+    console.log(this.$flipt.axiosInstance);
+  },
 };
 </script>
 

@@ -1,13 +1,34 @@
 {
   "name": "vue-flipt",
   "version": "0.1.0",
+  "description": "Vue client plugin for Flipt",
+  "author": "Mauro Verrocchio <mauroverrocchio@gmail.com>",
+  "license": "ISC",
+  "keywords": [
+    "vue",
+    "vuejs",
+    "directive",
+    "flipt",
+    "feature flag"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://https://github.com/maur8ino/vue-flipt"
+  },
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name vue-flipt ./src/index.js",
+    "build": "vue-cli-service build --target lib --name vue-flipt ./src/plugin.js",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
+  "main": "dist/vue-flipt.common.js",
+  "unpkg": "dist/vue-flipt.umd.min.js",
+  "files": [
+    "dist/*",
+    "src/*",
+    "*.json"
+  ],
   "dependencies": {
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
@@ -26,5 +47,11 @@
     "eslint-plugin-vue": "^6.2.2",
     "prettier": "^1.19.1",
     "vue-template-compiler": "^2.6.11"
-  }
+  },
+  "peerDependencies": {
+    "axios": "^0.21.0",
+    "vue": "^2.0.0 || >=3.0.0-rc.0"
+  },
+  "jsdelivr": "dist/vue-flipt.umd.min.js",
+  "sideeffects": false
 }

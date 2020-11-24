@@ -1,6 +1,7 @@
 const pkg = require("./package.json");
 
 module.exports = {
+  css: { extract: false },
   chainWebpack(config) {
     config
       .plugin("define")

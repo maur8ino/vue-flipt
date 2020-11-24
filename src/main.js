@@ -1,6 +1,8 @@
 import Vue from "vue";
 import App from "./App.vue";
-import "./plugin";
+import VueFlipt from "./plugin";
+
+Vue.use(VueFlipt, { url: "http://localhost:8080" });
 
 Vue.config.productionTip = false;
 
