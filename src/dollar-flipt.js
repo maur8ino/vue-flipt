@@ -12,22 +12,8 @@ export class DollarFlipt {
     }
 
     this._options = options;
-  }
-
-  get axiosInstance() {
-    if (!this._axiosInstance) {
-      this._axiosInstance = axios.create({ baseURL: this._options.url });
-    }
-
-    return this._axiosInstance;
-  }
-
-  get cache() {
-    if (!this._cache) {
-      this._cache = new Cache(this._options.cacheGracePeriod);
-    }
-
-    return this._cache;
+    this._axiosInstance = axios.create({ baseURL: options.url });
+    this._cache = new Cache(options.cacheGracePeriod);
   }
 
   async evaluate(entityId, flagKey, context) {
@@ -36,22 +22,22 @@ export class DollarFlipt {
     }
 
     if (!flagKey) {
-      throw new Error("flagKey url argument required");
+      throw new Error("flagKey argument required");
     }
 
     const key = { entityId, flagKey, context };
-    const cachedRequest = this.cache.getCached(key);
+    const cachedRequest = this._cache.getCached(key);
 
     if (cachedRequest) {
       return cachedRequest;
     }
 
-    const { data: request } = await this.axiosInstance.post(`/api/v1/evaluate`, {
+    const { data: request } = await this._axiosInstance.post(`/api/v1/evaluate`, {
       entityId,
       flagKey,
       context,
     });
-    this.cache.addToCache(request);
+    this._cache.addToCache(request);
 
     return request;
   }

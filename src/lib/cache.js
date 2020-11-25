@@ -28,6 +28,6 @@ export class Cache {
       return cachedValue.request;
     }
 
-    return false;
+    return undefined;
   }
 }

@@ -1813,7 +1813,7 @@ var es_array_reduce = __webpack_require__("13d5");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.keys.js
 var es_object_keys = __webpack_require__("b64b");
 
-// CONCATENATED MODULE: ./src/hash.js
+// CONCATENATED MODULE: ./src/lib/hash.js
 
 
 // A simple function that hashes the request object ordering keys on the context object
@@ -1834,7 +1834,7 @@ function hash(_ref) {
     context: context
   });
 }
-// CONCATENATED MODULE: ./src/cache.js
+// CONCATENATED MODULE: ./src/lib/cache.js
 
 
 
@@ -1907,7 +1907,7 @@ var cache_Cache = /*#__PURE__*/function () {
         return cachedValue.request;
       }
 
-      return false;
+      return undefined;
     }
   }]);
 
@@ -1933,13 +1933,17 @@ var dollar_flipt_DollarFlipt = /*#__PURE__*/function () {
     }
 
     this._options = options;
+    this._axiosInstance = external_axios_default.a.create({
+      baseURL: options.url
+    });
+    this._cache = new cache_Cache(options.cacheGracePeriod);
   }
 
   _createClass(DollarFlipt, [{
     key: "evaluate",
     value: function () {
       var _evaluate = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(entityId, flagKey, context) {
-        var key, cachedRequest, _yield$this$axiosInst, request;
+        var key, cachedRequest, _yield$this$_axiosIns, request;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -1958,7 +1962,7 @@ var dollar_flipt_DollarFlipt = /*#__PURE__*/function () {
                   break;
                 }
 
-                throw new Error("flagKey url argument required");
+                throw new Error("flagKey argument required");
 
               case 4:
                 key = {
@@ -1966,7 +1970,7 @@ var dollar_flipt_DollarFlipt = /*#__PURE__*/function () {
                   flagKey: flagKey,
                   context: context
                 };
-                cachedRequest = this.cache.getCached(key);
+                cachedRequest = this._cache.getCached(key);
 
                 if (!cachedRequest) {
                   _context.next = 8;
@@ -1977,16 +1981,18 @@ var dollar_flipt_DollarFlipt = /*#__PURE__*/function () {
 
               case 8:
                 _context.next = 10;
-                return this.axiosInstance.post("/api/v1/evaluate", {
+                return this._axiosInstance.post("/api/v1/evaluate", {
                   entityId: entityId,
                   flagKey: flagKey,
                   context: context
                 });
 
               case 10:
-                _yield$this$axiosInst = _context.sent;
-                request = _yield$this$axiosInst.data;
-                this.cache.addToCache(request);
+                _yield$this$_axiosIns = _context.sent;
+                request = _yield$this$_axiosIns.data;
+
+                this._cache.addToCache(request);
+
                 return _context.abrupt("return", request);
 
               case 14:
@@ -2003,26 +2009,6 @@ var dollar_flipt_DollarFlipt = /*#__PURE__*/function () {
 
       return evaluate;
     }()
-  }, {
-    key: "axiosInstance",
-    get: function get() {
-      if (!this._axiosInstance) {
-        this._axiosInstance = external_axios_default.a.create({
-          baseURL: this._options.url
-        });
-      }
-
-      return this._axiosInstance;
-    }
-  }, {
-    key: "cache",
-    get: function get() {
-      if (!this._cache) {
-        this._cache = new cache_Cache(this._options.cacheGracePeriod);
-      }
-
-      return this._cache;
-    }
   }]);
 
   return DollarFlipt;
