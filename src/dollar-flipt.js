@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { Cache } from "./cache";
+import { Cache } from "@/cache";
 
 export class DollarFlipt {
   constructor(options) {
