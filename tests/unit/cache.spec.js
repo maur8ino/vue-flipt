@@ -5,16 +5,16 @@ describe("Cache", () => {
     const cache = new Cache();
 
     expect(cache).toBeDefined();
-    expect(cache.isCached).toBeDefined();
     expect(cache.addToCache).toBeDefined();
+    expect(cache.getCached).toBeDefined();
   });
 
-  xit("should add a request to the cache", () => {
+  it("should add a request to the cache", () => {
     const cache = new Cache();
     const request = {
       requestId: "e38347fe-0fa2-4ff4-9f0b-f5e5174abfbb",
       entityId: "entity-1",
-      // requestContext: { value1: "red", value2: "green" },
+      requestContext: { value1: "red", value2: "green" },
       match: true,
       flagKey: "test-flag",
       segmentKey: "test-segment",
@@ -24,8 +24,6 @@ describe("Cache", () => {
     };
     cache.addToCache(request);
 
-    expect(
-      cache.isCached({ flagKey: "test-flag", entityId: "entity-1"/*, context: { value1: "red", value2: "green" } */})
-    ).toBeTruthy();
+    expect(cache._map.size).toBe(1);
   });
 });

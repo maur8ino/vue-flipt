@@ -16,6 +16,10 @@ export default {
   async mounted() {
     const request = await this.$flipt.evaluate("entity-1", "test-flag");
     console.log(request);
+    const request2 = await this.$flipt.evaluate("entity-1", "test-flag");
+    console.log(request2);
+    const request3 = await this.$flipt.evaluate("entity-1", "test-flag");
+    console.log(request3);
   },
 };
 </script>

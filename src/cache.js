@@ -1,3 +1,5 @@
+import hash from "object-hash";
+
 const FIFTEEN_MINUTES_IN_MILLIS = 15 * 60 * 1000;
 
 export const defaultCacheGracePeriod = FIFTEEN_MINUTES_IN_MILLIS;
@@ -5,27 +7,27 @@ export const defaultCacheGracePeriod = FIFTEEN_MINUTES_IN_MILLIS;
 export class Cache {
   constructor(cacheGracePeriod = defaultCacheGracePeriod) {
     this._cacheGracePeriod = cacheGracePeriod;
-    this._cache = new Map();
+    this._map = new Map();
   }
 
-  isCached({ flagKey, entityId, context }) {
-    const key = { flagKey, entityId, requestContext: context };
-    console.log(this._cache);
-    if (this._cache.has(key)) {
-      const { timestamp } = this._cache.get(key);
-      return timestamp > Date.now() - this._cacheGracePeriod;
-    }
-
-    return false;
+  _getKey({ flagKey, entityId, context = {} }) {
+    return hash({ flagKey, entityId, context });
   }
 
   addToCache(request) {
     const { flagKey, entityId, requestContext: context, timestamp: timestampString } = request;
-    const key = { flagKey, entityId };
-    if (context) {
-      key.context = context;
-    }
+    const hashedKey = this._getKey({ flagKey, entityId, context });
     const timestamp = new Date(timestampString).valueOf();
-    this._cache.set(key, { request, timestamp });
+    this._map.set(hashedKey, { request, timestamp });
+  }
+
+  getCached({ flagKey, entityId, context }) {
+    const hashedKey = this._getKey({ flagKey, entityId, context });
+    const cachedValue = this._map.get(hashedKey);
+    if (cachedValue && cachedValue.timestamp && cachedValue.timestamp + this._cacheGracePeriod > Date.now()) {
+      return cachedValue.request;
+    }
+
+    return false;
   }
 }
