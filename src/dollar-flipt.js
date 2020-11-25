@@ -9,26 +9,31 @@ export class DollarFlipt {
       throw new Error("Options url argument required");
     }
 
-    this.options = options;
+    this._options = options;
   }
 
-  getAxiosInstance() {
-    if (!this.axiosInstance) {
-      this.axiosInstance = axios.create({ baseURL: this.options.url });
+  get axiosInstance() {
+    if (!this._axiosInstance) {
+      this._axiosInstance = axios.create({ baseURL: this._options.url });
     }
 
-    return this.axiosInstance;
+    return this._axiosInstance;
   }
 
-  async evaluate() {
-    const { data: flagRes } = await this.getAxiosInstance().post(`/api/v1/evaluate`, {
-      flagKey: "test-flag",
-      entityId: "ss",
-      context: {
-        ciccio: "ciccio",
-      },
+  async evaluate(entityId, flagKey, context) {
+    if (!entityId) {
+      throw new Error("entityId argument required");
+    }
+    if (!flagKey) {
+      throw new Error("flagKey url argument required");
+    }
+
+    const { data } = await this.axiosInstance.post(`/api/v1/evaluate`, {
+      entityId,
+      flagKey,
+      context,
     });
 
-    return flagRes;
+    return data;
   }
 }

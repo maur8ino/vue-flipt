@@ -14,9 +14,8 @@ export default {
     HelloWorld,
   },
   async mounted() {
-    const flag = await this.$flipt.evaluate();
-    console.log(flag);
-    console.log(this.$flipt.axiosInstance);
+    const request = await this.$flipt.evaluate("entity-1", "test-flag");
+    console.log(request);
   },
 };
 </script>

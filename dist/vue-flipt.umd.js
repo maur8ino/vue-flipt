@@ -1119,45 +1119,48 @@ var dollar_flipt_DollarFlipt = /*#__PURE__*/function () {
       throw new Error("Options url argument required");
     }
 
-    this.options = options;
+    this._options = options;
   }
 
   _createClass(DollarFlipt, [{
-    key: "getAxiosInstance",
-    value: function getAxiosInstance() {
-      if (!this.axiosInstance) {
-        this.axiosInstance = external_axios_default.a.create({
-          baseURL: this.options.url
-        });
-      }
-
-      return this.axiosInstance;
-    }
-  }, {
     key: "evaluate",
     value: function () {
-      var _evaluate = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var _yield$this$getAxiosI, flagRes;
+      var _evaluate = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(entityId, flagKey, context) {
+        var _yield$this$axiosInst, data;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return this.getAxiosInstance().post("/api/v1/evaluate", {
-                  flagKey: "test-flag",
-                  entityId: "ss",
-                  context: {
-                    ciccio: "ciccio"
-                  }
-                });
+                if (entityId) {
+                  _context.next = 2;
+                  break;
+                }
+
+                throw new Error("entityId argument required");
 
               case 2:
-                _yield$this$getAxiosI = _context.sent;
-                flagRes = _yield$this$getAxiosI.data;
-                return _context.abrupt("return", flagRes);
+                if (flagKey) {
+                  _context.next = 4;
+                  break;
+                }
 
-              case 5:
+                throw new Error("flagKey url argument required");
+
+              case 4:
+                _context.next = 6;
+                return this.axiosInstance.post("/api/v1/evaluate", {
+                  entityId: entityId,
+                  flagKey: flagKey,
+                  context: context
+                });
+
+              case 6:
+                _yield$this$axiosInst = _context.sent;
+                data = _yield$this$axiosInst.data;
+                return _context.abrupt("return", data);
+
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -1165,12 +1168,23 @@ var dollar_flipt_DollarFlipt = /*#__PURE__*/function () {
         }, _callee, this);
       }));
 
-      function evaluate() {
+      function evaluate(_x, _x2, _x3) {
         return _evaluate.apply(this, arguments);
       }
 
       return evaluate;
     }()
+  }, {
+    key: "axiosInstance",
+    get: function get() {
+      if (!this._axiosInstance) {
+        this._axiosInstance = external_axios_default.a.create({
+          baseURL: this._options.url
+        });
+      }
+
+      return this._axiosInstance;
+    }
   }]);
 
   return DollarFlipt;
