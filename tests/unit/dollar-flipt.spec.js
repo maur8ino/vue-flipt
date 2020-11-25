@@ -1,7 +1,18 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 
+import { Cache } from "@/lib/cache";
 import { DollarFlipt } from "@/dollar-flipt";
+
+const mockAddToCache = jest.fn();
+const mockGetCached = jest.fn();
+jest.mock("@/lib/cache", () => {
+  return {
+    Cache: jest.fn().mockImplementation(() => {
+      return { addToCache: mockAddToCache, getCached: mockGetCached };
+    }),
+  };
+});
 
 describe("DollarFlipt", () => {
   describe("constructor", () => {
@@ -54,31 +65,36 @@ describe("DollarFlipt", () => {
       );
 
       beforeAll(() => server.listen());
+      beforeEach(() => {
+        Cache.mockClear();
+        mockAddToCache.mockClear();
+        mockGetCached.mockClear();
+      });
       afterEach(() => server.resetHandlers());
       afterAll(() => server.close());
 
       it("should hit the evaluate api", async () => {
+        mockAddToCache.mockImplementation();
+        mockGetCached.mockImplementation();
         const df = new DollarFlipt({ url: "https://myserver.io" });
-        df._cache.addToCache = jest.fn();
-        df._cache.getCached = jest.fn();
 
         const request = await df.evaluate("entity-1", "test-flag", { value1: "red", value2: "green" });
 
         expect(request).toEqual(request1);
-        expect(df._cache.addToCache).toHaveBeenCalled();
-        expect(df._cache.getCached).toHaveBeenCalled();
+        expect(mockAddToCache).toHaveBeenCalled();
+        expect(mockGetCached).toHaveBeenCalled();
       });
 
       it("should not hit the evaluate api if the value is cached", async () => {
+        mockAddToCache.mockImplementation();
+        mockGetCached.mockImplementation(() => request1);
         const df = new DollarFlipt({ url: "https://myserver.io" });
-        df._cache.addToCache = jest.fn();
-        df._cache.getCached = jest.fn(() => request1);
 
         const request = await df.evaluate("entity-1", "test-flag", { value1: "red", value2: "green" });
 
         expect(request).toEqual(request1);
-        expect(df._cache.addToCache).not.toHaveBeenCalled();
-        expect(df._cache.getCached).toHaveBeenCalled();
+        expect(mockAddToCache).not.toHaveBeenCalled();
+        expect(mockGetCached).toHaveBeenCalled();
       });
 
       it("should throw an error if the request fails", async () => {
