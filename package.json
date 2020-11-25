@@ -31,7 +31,7 @@
   ],
   "dependencies": {
     "core-js": "^3.6.5",
-    "object-hash": "^2.0.3",
+    "json-stable-stringify": "^1.0.1",
     "vue": "^2.6.11"
   },
   "devDependencies": {

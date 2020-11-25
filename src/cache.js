@@ -1,4 +1,4 @@
-import hash from "object-hash";
+import stringify from "json-stable-stringify";
 
 const FIFTEEN_MINUTES_IN_MILLIS = 15 * 60 * 1000;
 
@@ -11,7 +11,7 @@ export class Cache {
   }
 
   _getKey({ flagKey, entityId, context = {} }) {
-    return hash({ flagKey, entityId, context });
+    return stringify({ flagKey, entityId, context });
   }
 
   addToCache(request) {
