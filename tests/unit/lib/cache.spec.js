@@ -1,4 +1,4 @@
-import { Cache } from "@/cache";
+import { Cache } from "@/lib/cache";
 
 describe("Cache", () => {
   it("should create a new instance with methods", () => {

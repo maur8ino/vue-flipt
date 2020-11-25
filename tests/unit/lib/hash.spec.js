@@ -1,4 +1,4 @@
-import { hash } from "@/hash";
+import { hash } from "@/lib/hash";
 
 describe("hash", () => {
   it("should hash a request object with empty context", () => {

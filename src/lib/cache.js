@@ -1,4 +1,4 @@
-import { hash } from "@/hash";
+import { hash } from "@/lib/hash";
 
 const FIFTEEN_MINUTES_IN_MILLIS = 15 * 60 * 1000;
 
