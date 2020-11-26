@@ -18,7 +18,9 @@ describe("DollarFlipt", () => {
   describe("constructor", () => {
     it("should throw an error if no options are provided", () => {
       expect(() => new DollarFlipt()).toThrowError("Options argument required");
-      expect(() => new DollarFlipt({ foo: "bar" })).toThrowError("Options url argument required");
+      expect(() => new DollarFlipt({ foo: "bar" })).toThrowError(
+        "Options url argument required"
+      );
     });
   });
 
@@ -59,9 +61,12 @@ describe("DollarFlipt", () => {
         rest.post("https://myserver.io/api/v1/evaluate", (__req, res, ctx) => {
           return res(ctx.status(200), ctx.json(request1));
         }),
-        rest.post("https://mywrongserver.io/api/v1/evaluate", (__req, res, ctx) => {
-          return res(ctx.status(500), ctx.json({}));
-        })
+        rest.post(
+          "https://mywrongserver.io/api/v1/evaluate",
+          (__req, res, ctx) => {
+            return res(ctx.status(500), ctx.json({}));
+          }
+        )
       );
 
       beforeAll(() => server.listen());
@@ -78,7 +83,10 @@ describe("DollarFlipt", () => {
         mockGetCached.mockImplementation();
         const df = new DollarFlipt({ url: "https://myserver.io" });
 
-        const request = await df.evaluate("entity-1", "test-flag", { value1: "red", value2: "green" });
+        const request = await df.evaluate("entity-1", "test-flag", {
+          value1: "red",
+          value2: "green",
+        });
 
         expect(request).toEqual(request1);
         expect(mockAddToCache).toHaveBeenCalled();
@@ -90,7 +98,10 @@ describe("DollarFlipt", () => {
         mockGetCached.mockImplementation(() => request1);
         const df = new DollarFlipt({ url: "https://myserver.io" });
 
-        const request = await df.evaluate("entity-1", "test-flag", { value1: "red", value2: "green" });
+        const request = await df.evaluate("entity-1", "test-flag", {
+          value1: "red",
+          value2: "green",
+        });
 
         expect(request).toEqual(request1);
         expect(mockAddToCache).not.toHaveBeenCalled();
@@ -101,7 +112,10 @@ describe("DollarFlipt", () => {
         const df = new DollarFlipt({ url: "https://mywrongserver.io" });
 
         try {
-          await df.evaluate("entity-1", "test-flag", { value1: "red", value2: "green" });
+          await df.evaluate("entity-1", "test-flag", {
+            value1: "red",
+            value2: "green",
+          });
         } catch (e) {
           expect(e).toEqual(new Error("Request failed with status code 500"));
         }

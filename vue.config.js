@@ -13,12 +13,16 @@ module.exports = {
         return definitions;
       })
       .end()
-      .externals(process.env.NODE_ENV === "production" ? { axios: "axios" } : undefined);
+      .externals(
+        process.env.NODE_ENV === "production" ? { axios: "axios" } : undefined
+      );
   },
 
   configureWebpack(config) {
     config.plugins.some((plugin, index) => {
-      return plugin.options?.filename === "demo.html" ? config.plugins.splice(index, 1) : false;
+      return plugin.options?.filename === "demo.html"
+        ? config.plugins.splice(index, 1)
+        : false;
     });
   },
 };

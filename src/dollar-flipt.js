@@ -32,11 +32,14 @@ export class DollarFlipt {
       return cachedRequest;
     }
 
-    const { data: request } = await this._axiosInstance.post(`/api/v1/evaluate`, {
-      entityId,
-      flagKey,
-      context,
-    });
+    const { data: request } = await this._axiosInstance.post(
+      `/api/v1/evaluate`,
+      {
+        entityId,
+        flagKey,
+        context,
+      }
+    );
     this._cache.addToCache(request);
 
     return request;

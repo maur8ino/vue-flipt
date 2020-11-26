@@ -15,7 +15,12 @@ export class Cache {
   }
 
   addToCache(request) {
-    const { flagKey, entityId, requestContext: context, timestamp: timestampString } = request;
+    const {
+      flagKey,
+      entityId,
+      requestContext: context,
+      timestamp: timestampString,
+    } = request;
     const hashedKey = this._getKey({ flagKey, entityId, context });
     const timestamp = new Date(timestampString).valueOf();
     this._map.set(hashedKey, { request, timestamp });
@@ -24,7 +29,11 @@ export class Cache {
   getCached({ flagKey, entityId, context }) {
     const hashedKey = this._getKey({ flagKey, entityId, context });
     const cachedValue = this._map.get(hashedKey);
-    if (cachedValue && cachedValue.timestamp && cachedValue.timestamp + this._cacheGracePeriod > Date.now()) {
+    if (
+      cachedValue &&
+      cachedValue.timestamp &&
+      cachedValue.timestamp + this._cacheGracePeriod > Date.now()
+    ) {
       return cachedValue.request;
     }
 
