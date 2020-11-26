@@ -96,6 +96,58 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
+/***/ "5daf":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+  name: "FliptMatch",
+  props: {
+    entityId: {
+      type: String,
+      required: true
+    },
+    flagKey: {
+      type: String,
+      required: true
+    },
+    context: {
+      type: Object
+    }
+  },
+  data: function data() {
+    return {
+      error: null,
+      loading: false,
+      match: null
+    };
+  },
+  methods: {
+    getDollarFlipt: function getDollarFlipt() {
+      return this.$flipt;
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.loading = true;
+    this.$flipt.evaluate(this.entityId, this.flagKey, this.context).then(function (response) {
+      _this.match = response.match;
+    }).catch(function (error) {
+      _this.$emit("error", error);
+
+      _this.error = true;
+    }).finally(function () {
+      _this.loading = false;
+    });
+  },
+  render: function render() {
+    return this.loading ? this.$slots.loading : this.error ? this.$slots.error : this.$slots.default;
+  }
+});
+
+/***/ }),
+
 /***/ "62e4":
 /***/ (function(module, exports) {
 
@@ -1213,6 +1265,9 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_cebe__;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "FliptMatch", function() { return /* reexport */ src_plugin["a" /* FliptMatch */]; });
+
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/setPublicPath.js
 // This file is imported into lib/wc client bundles.
 
@@ -1243,7 +1298,7 @@ var src_plugin = __webpack_require__("fe83");
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
 
 
-/* harmony default export */ var entry_lib = __webpack_exports__["default"] = (src_plugin["a" /* default */]);
+/* harmony default export */ var entry_lib = __webpack_exports__["default"] = (src_plugin["b" /* default */]);
 
 
 
@@ -1253,7 +1308,10 @@ var src_plugin = __webpack_require__("fe83");
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var _dollar_flipt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("7f05");
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FliptMatch; });
+/* harmony import */ var _components_FliptMatch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("5daf");
+/* harmony import */ var _dollar_flipt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("7f05");
+
  // Declare install function executed by Vue.use()
 
 function install(Vue, options) {
@@ -1261,13 +1319,15 @@ function install(Vue, options) {
     return;
   }
 
-  install.installed = true; // Lazy creation
+  install.installed = true;
+  Vue.component("flipt-match", _components_FliptMatch__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]);
+  Vue.component("FliptMatch", _components_FliptMatch__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]); // Lazy creation
 
   if (!Object.prototype.hasOwnProperty.call(Vue, "$flipt")) {
     Object.defineProperty(Vue.prototype, "$flipt", {
       get: function get() {
         if (!this.$_flipt) {
-          this.$_flipt = new _dollar_flipt__WEBPACK_IMPORTED_MODULE_0__[/* DollarFlipt */ "a"](options);
+          this.$_flipt = new _dollar_flipt__WEBPACK_IMPORTED_MODULE_1__[/* DollarFlipt */ "a"](options);
         }
 
         return this.$_flipt;
@@ -1294,7 +1354,8 @@ if (GlobalVue) {
   GlobalVue.use(plugin);
 }
 
-/* harmony default export */ __webpack_exports__["a"] = (plugin);
+var FliptMatch = _components_FliptMatch__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"];
+/* harmony default export */ __webpack_exports__["b"] = (plugin);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("c8ba")))
 
 /***/ })

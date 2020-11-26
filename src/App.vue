@@ -1,25 +1,24 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <FliptMatch entity-id="entity-1" flag-key="test-flag">
+      <template slot="loading"> <div>loading</div></template>
+      <div>ciccio</div>
+    </FliptMatch>
+    <FliptMatch entity-id="entity-1" flag-key="test-flag">
+      <template slot="loading"> <div>loading2</div></template>
+      <div>ciccio2</div>
+    </FliptMatch>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import FliptMatch from "@/components/FliptMatch";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
-  },
-  async mounted() {
-    const request = await this.$flipt.evaluate("entity-1", "test-flag");
-    console.log(request);
-    const request2 = await this.$flipt.evaluate("entity-1", "test-flag");
-    console.log(request2);
-    const request3 = await this.$flipt.evaluate("entity-1", "test-flag");
-    console.log(request3);
+    FliptMatch,
   },
 };
 </script>
