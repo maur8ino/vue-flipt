@@ -1,20 +1,37 @@
+import {
+  fliptEntityId,
+  fliptFlagKey,
+  fliptContext,
+  fliptBaseURL,
+} from "./FliptProvider";
+
 export default {
   name: "Flipt",
 
   props: {
     entityId: {
       type: String,
-      required: true,
+      default() {
+        return this.fliptEntityId;
+      },
     },
     flagKey: {
       type: String,
-      required: true,
+      default() {
+        return this.fliptFlagKey;
+      },
     },
     context: {
       type: Object,
+      default() {
+        return this.fliptContext;
+      },
     },
     baseURL: {
       type: String,
+      default() {
+        return this.fliptBaseURL;
+      },
     },
   },
 
@@ -26,6 +43,8 @@ export default {
       value: null,
     };
   },
+
+  inject: { fliptEntityId, fliptFlagKey, fliptContext, fliptBaseURL },
 
   methods: {
     getDollarFlipt() {

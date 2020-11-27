@@ -1,4 +1,5 @@
 import CFlipt from "@/components/Flipt";
+import CFliptProvider from "@/components/FliptProvider";
 import { DollarFlipt } from "./dollar-flipt";
 
 // Declare install function executed by Vue.use()
@@ -10,6 +11,8 @@ function install(Vue, options) {
 
   Vue.component("flipt", CFlipt);
   Vue.component("Flipt", CFlipt);
+  Vue.component("flipt-provider", CFliptProvider);
+  Vue.component("FliptProvider", CFliptProvider);
 
   // Lazy creation
   if (!Object.prototype.hasOwnProperty.call(Vue, "$flipt")) {

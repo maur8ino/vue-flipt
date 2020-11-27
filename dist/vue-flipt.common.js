@@ -91,22 +91,34 @@ module.exports =
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var _FliptProvider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("6ce4");
+
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: "Flipt",
   props: {
     entityId: {
       type: String,
-      required: true
+      default: function _default() {
+        return this.fliptEntityId;
+      }
     },
     flagKey: {
       type: String,
-      required: true
+      default: function _default() {
+        return this.fliptFlagKey;
+      }
     },
     context: {
-      type: Object
+      type: Object,
+      default: function _default() {
+        return this.fliptContext;
+      }
     },
     baseURL: {
-      type: String
+      type: String,
+      default: function _default() {
+        return this.fliptBaseURL;
+      }
     }
   },
   data: function data() {
@@ -116,6 +128,12 @@ module.exports =
       match: null,
       value: null
     };
+  },
+  inject: {
+    fliptEntityId: _FliptProvider__WEBPACK_IMPORTED_MODULE_0__[/* fliptEntityId */ "d"],
+    fliptFlagKey: _FliptProvider__WEBPACK_IMPORTED_MODULE_0__[/* fliptFlagKey */ "e"],
+    fliptContext: _FliptProvider__WEBPACK_IMPORTED_MODULE_0__[/* fliptContext */ "c"],
+    fliptBaseURL: _FliptProvider__WEBPACK_IMPORTED_MODULE_0__[/* fliptBaseURL */ "b"]
   },
   methods: {
     getDollarFlipt: function getDollarFlipt() {
@@ -180,6 +198,50 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+
+/***/ "6ce4":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return fliptEntityId; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return fliptFlagKey; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return fliptContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return fliptBaseURL; });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var fliptEntityId = Symbol("fliptEntityId");
+var fliptFlagKey = Symbol("fliptFlagKey");
+var fliptContext = Symbol("fliptContext");
+var fliptBaseURL = Symbol("fliptBaseURL");
+/* harmony default export */ __webpack_exports__["a"] = ({
+  name: "FliptProvider",
+  props: {
+    entityId: {
+      type: String,
+      required: true
+    },
+    flagKey: {
+      type: String,
+      required: true
+    },
+    context: {
+      type: Object
+    },
+    baseURL: {
+      type: String
+    }
+  },
+  provide: function provide() {
+    var _ref;
+
+    return _ref = {}, _defineProperty(_ref, fliptEntityId, this.entityId), _defineProperty(_ref, fliptFlagKey, this.flagKey), _defineProperty(_ref, fliptContext, this.context), _defineProperty(_ref, fliptBaseURL, this.baseURL), _ref;
+  },
+  render: function render() {
+    return this.$scopedSlots.default();
+  }
+});
 
 /***/ }),
 
@@ -1316,7 +1378,9 @@ var src_plugin = __webpack_require__("fe83");
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Flipt; });
 /* harmony import */ var _components_Flipt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("2cec");
-/* harmony import */ var _dollar_flipt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("7f05");
+/* harmony import */ var _components_FliptProvider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("6ce4");
+/* harmony import */ var _dollar_flipt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("7f05");
+
 
  // Declare install function executed by Vue.use()
 
@@ -1327,13 +1391,15 @@ function install(Vue, options) {
 
   install.installed = true;
   Vue.component("flipt", _components_Flipt__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]);
-  Vue.component("Flipt", _components_Flipt__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]); // Lazy creation
+  Vue.component("Flipt", _components_Flipt__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]);
+  Vue.component("flipt-provider", _components_FliptProvider__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
+  Vue.component("FliptProvider", _components_FliptProvider__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]); // Lazy creation
 
   if (!Object.prototype.hasOwnProperty.call(Vue, "$flipt")) {
     Object.defineProperty(Vue.prototype, "$flipt", {
       get: function get() {
         if (!this.$_flipt) {
-          this.$_flipt = new _dollar_flipt__WEBPACK_IMPORTED_MODULE_1__[/* DollarFlipt */ "a"](options);
+          this.$_flipt = new _dollar_flipt__WEBPACK_IMPORTED_MODULE_2__[/* DollarFlipt */ "a"](options);
         }
 
         return this.$_flipt;
