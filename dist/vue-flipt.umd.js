@@ -96,12 +96,12 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
-/***/ "5daf":
+/***/ "2cec":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
-  name: "FliptMatch",
+  name: "Flipt",
   props: {
     entityId: {
       type: String,
@@ -1278,7 +1278,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_cebe__;
 __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
-__webpack_require__.d(__webpack_exports__, "FliptMatch", function() { return /* reexport */ src_plugin["a" /* FliptMatch */]; });
+__webpack_require__.d(__webpack_exports__, "Flipt", function() { return /* reexport */ src_plugin["a" /* Flipt */]; });
 
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/setPublicPath.js
 // This file is imported into lib/wc client bundles.
@@ -1320,8 +1320,8 @@ var src_plugin = __webpack_require__("fe83");
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FliptMatch; });
-/* harmony import */ var _components_FliptMatch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("5daf");
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Flipt; });
+/* harmony import */ var _components_Flipt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("2cec");
 /* harmony import */ var _dollar_flipt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("7f05");
 
  // Declare install function executed by Vue.use()
@@ -1332,8 +1332,8 @@ function install(Vue, options) {
   }
 
   install.installed = true;
-  Vue.component("flipt-match", _components_FliptMatch__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]);
-  Vue.component("FliptMatch", _components_FliptMatch__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]); // Lazy creation
+  Vue.component("flipt", _components_Flipt__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]);
+  Vue.component("Flipt", _components_Flipt__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]); // Lazy creation
 
   if (!Object.prototype.hasOwnProperty.call(Vue, "$flipt")) {
     Object.defineProperty(Vue.prototype, "$flipt", {
@@ -1366,7 +1366,7 @@ if (GlobalVue) {
   GlobalVue.use(plugin);
 }
 
-var FliptMatch = _components_FliptMatch__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"];
+var Flipt = _components_Flipt__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"];
 /* harmony default export */ __webpack_exports__["b"] = (plugin);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("c8ba")))
 

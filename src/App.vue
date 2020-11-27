@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
-    <FliptMatch entity-id="entity-1" flag-key="test-flag-2">
+    <Flipt entity-id="entity-1" flag-key="test-flag-2">
       <template #default="{ error, loading, match, value }">
         <div>
           <ul>
@@ -13,17 +13,17 @@
           <h3 v-if="!loading && !error">Loaded!</h3>
         </div>
       </template>
-    </FliptMatch>
+    </Flipt>
   </div>
 </template>
 
 <script>
-import FliptMatch from "@/components/FliptMatch";
+import Flipt from "@/components/Flipt";
 
 export default {
   name: "App",
   components: {
-    FliptMatch,
+    Flipt,
   },
 };
 </script>

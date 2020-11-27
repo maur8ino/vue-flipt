@@ -1,5 +1,5 @@
 export default {
-  name: "FliptMatch",
+  name: "Flipt",
 
   props: {
     entityId: {

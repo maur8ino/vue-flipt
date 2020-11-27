@@ -1,4 +1,4 @@
-import CFliptMatch from "@/components/FliptMatch";
+import CFlipt from "@/components/Flipt";
 import { DollarFlipt } from "./dollar-flipt";
 
 // Declare install function executed by Vue.use()
@@ -8,8 +8,8 @@ function install(Vue, options) {
   }
   install.installed = true;
 
-  Vue.component("flipt-match", CFliptMatch);
-  Vue.component("FliptMatch", CFliptMatch);
+  Vue.component("flipt", CFlipt);
+  Vue.component("Flipt", CFlipt);
 
   // Lazy creation
   if (!Object.prototype.hasOwnProperty.call(Vue, "$flipt")) {
@@ -41,5 +41,5 @@ if (GlobalVue) {
   GlobalVue.use(plugin);
 }
 
-export const FliptMatch = CFliptMatch;
+export const Flipt = CFlipt;
 export default plugin;
