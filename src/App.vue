@@ -1,13 +1,18 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
-    <FliptMatch entity-id="entity-1" flag-key="test-flag">
-      <template slot="loading"> <div>loading</div></template>
-      <div>ciccio</div>
-    </FliptMatch>
-    <FliptMatch entity-id="entity-1" flag-key="test-flag">
-      <template slot="loading"> <div>loading2</div></template>
-      <div>ciccio2</div>
+    <FliptMatch entity-id="entity-1" flag-key="test-flag-2">
+      <template #default="{ error, loading, match, value }">
+        <div>
+          <ul>
+            <li>Error: {{ error }}</li>
+            <li>Loading: {{ loading }}</li>
+            <li>Match: {{ match }}</li>
+            <li>Value: {{ value }}</li>
+          </ul>
+          <h3 v-if="!loading && !error">Loaded!</h3>
+        </div>
+      </template>
     </FliptMatch>
   </div>
 </template>

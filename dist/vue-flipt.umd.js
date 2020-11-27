@@ -119,7 +119,8 @@ return /******/ (function(modules) { // webpackBootstrap
     return {
       error: null,
       loading: false,
-      match: null
+      match: null,
+      value: null
     };
   },
   methods: {
@@ -127,22 +128,33 @@ return /******/ (function(modules) { // webpackBootstrap
       return this.$flipt;
     }
   },
-  mounted: function mounted() {
+  created: function created() {
     var _this = this;
 
     this.loading = true;
     this.$flipt.evaluate(this.entityId, this.flagKey, this.context).then(function (response) {
       _this.match = response.match;
+      _this.value = response.value;
     }).catch(function (error) {
-      _this.$emit("error", error);
-
       _this.error = true;
+
+      _this.$emit("error", error);
     }).finally(function () {
       _this.loading = false;
+
+      _this.$emit("loaded", {
+        match: _this.match,
+        value: _this.value
+      });
     });
   },
   render: function render() {
-    return this.loading ? this.$slots.loading : this.error ? this.$slots.error : this.$slots.default;
+    return this.$scopedSlots.default({
+      error: this.error,
+      loading: this.loading,
+      match: this.match,
+      value: this.value
+    });
   }
 });
 

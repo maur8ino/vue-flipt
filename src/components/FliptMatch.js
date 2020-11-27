@@ -20,6 +20,7 @@ export default {
       error: null,
       loading: false,
       match: null,
+      value: null,
     };
   },
 
@@ -29,27 +30,30 @@ export default {
     },
   },
 
-  mounted() {
+  created() {
     this.loading = true;
     this.$flipt
       .evaluate(this.entityId, this.flagKey, this.context)
       .then(response => {
         this.match = response.match;
+        this.value = response.value;
       })
       .catch(error => {
-        this.$emit("error", error);
         this.error = true;
+        this.$emit("error", error);
       })
       .finally(() => {
         this.loading = false;
+        this.$emit("loaded", { match: this.match, value: this.value });
       });
   },
 
   render() {
-    return this.loading
-      ? this.$slots.loading
-      : this.error
-      ? this.$slots.error
-      : this.$slots.default;
+    return this.$scopedSlots.default({
+      error: this.error,
+      loading: this.loading,
+      match: this.match,
+      value: this.value,
+    });
   },
 };
