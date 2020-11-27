@@ -13,6 +13,9 @@ export default {
     context: {
       type: Object,
     },
+    baseURL: {
+      type: String,
+    },
   },
 
   data() {
@@ -33,7 +36,7 @@ export default {
   created() {
     this.loading = true;
     this.$flipt
-      .evaluate(this.entityId, this.flagKey, this.context)
+      .evaluate(this.entityId, this.flagKey, this.context, this.baseURL)
       .then(response => {
         this.match = response.match;
         this.value = response.value;

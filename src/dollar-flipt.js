@@ -3,20 +3,12 @@ import axios from "axios";
 import { Cache } from "@/lib/cache";
 
 export class DollarFlipt {
-  constructor(options) {
-    if (!options) {
-      throw new Error("Options argument required");
-    }
-    if (!options.url) {
-      throw new Error("Options url argument required");
-    }
-
-    this._options = options;
-    this._axiosInstance = axios.create({ baseURL: options.url });
-    this._cache = new Cache(options.cacheGracePeriod);
+  constructor({ baseURL, cacheGracePeriod } = {}) {
+    this._axiosInstance = axios.create({ baseURL });
+    this._cache = new Cache(cacheGracePeriod);
   }
 
-  async evaluate(entityId, flagKey, context) {
+  async evaluate(entityId, flagKey, context, baseURL) {
     if (!entityId) {
       throw new Error("entityId argument required");
     }
@@ -32,14 +24,16 @@ export class DollarFlipt {
       return cachedRequest;
     }
 
-    const { data: request } = await this._axiosInstance.post(
-      `/api/v1/evaluate`,
-      {
+    const { data: request } = await this._axiosInstance({
+      url: "/api/v1/evaluate",
+      baseURL,
+      method: "POST",
+      data: {
         entityId,
         flagKey,
         context,
-      }
-    );
+      },
+    });
     this._cache.addToCache(request);
 
     return request;

@@ -113,6 +113,9 @@ return /******/ (function(modules) { // webpackBootstrap
     },
     context: {
       type: Object
+    },
+    baseURL: {
+      type: String
     }
   },
   data: function data() {
@@ -132,7 +135,7 @@ return /******/ (function(modules) { // webpackBootstrap
     var _this = this;
 
     this.loading = true;
-    this.$flipt.evaluate(this.entityId, this.flagKey, this.context).then(function (response) {
+    this.$flipt.evaluate(this.entityId, this.flagKey, this.context, this.baseURL).then(function (response) {
       _this.match = response.match;
       _this.value = response.value;
     }).catch(function (error) {
@@ -318,28 +321,23 @@ function dollar_flipt_createClass(Constructor, protoProps, staticProps) { if (pr
 
 
 var dollar_flipt_DollarFlipt = /*#__PURE__*/function () {
-  function DollarFlipt(options) {
+  function DollarFlipt() {
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        baseURL = _ref.baseURL,
+        cacheGracePeriod = _ref.cacheGracePeriod;
+
     dollar_flipt_classCallCheck(this, DollarFlipt);
 
-    if (!options) {
-      throw new Error("Options argument required");
-    }
-
-    if (!options.url) {
-      throw new Error("Options url argument required");
-    }
-
-    this._options = options;
     this._axiosInstance = external_axios_default.a.create({
-      baseURL: options.url
+      baseURL: baseURL
     });
-    this._cache = new cache_Cache(options.cacheGracePeriod);
+    this._cache = new cache_Cache(cacheGracePeriod);
   }
 
   dollar_flipt_createClass(DollarFlipt, [{
     key: "evaluate",
     value: function () {
-      var _evaluate = _asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee(entityId, flagKey, context) {
+      var _evaluate = _asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee(entityId, flagKey, context, baseURL) {
         var key, cachedRequest, _yield$this$_axiosIns, request;
 
         return regenerator_default.a.wrap(function _callee$(_context) {
@@ -378,10 +376,15 @@ var dollar_flipt_DollarFlipt = /*#__PURE__*/function () {
 
               case 8:
                 _context.next = 10;
-                return this._axiosInstance.post("/api/v1/evaluate", {
-                  entityId: entityId,
-                  flagKey: flagKey,
-                  context: context
+                return this._axiosInstance({
+                  url: "/api/v1/evaluate",
+                  baseURL: baseURL,
+                  method: "POST",
+                  data: {
+                    entityId: entityId,
+                    flagKey: flagKey,
+                    context: context
+                  }
                 });
 
               case 10:
@@ -400,7 +403,7 @@ var dollar_flipt_DollarFlipt = /*#__PURE__*/function () {
         }, _callee, this);
       }));
 
-      function evaluate(_x, _x2, _x3) {
+      function evaluate(_x, _x2, _x3, _x4) {
         return _evaluate.apply(this, arguments);
       }
 
