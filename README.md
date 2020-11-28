@@ -2,6 +2,13 @@
 
 A simple wrapper around the [Flipt](https://flipt.io/) api for getting enabled flags/values.
 
+### Todo for v1.0
+- [ ] cache promises in order to avoid multiple requests
+- [ ] support batch evaluate
+- [ ] provide/inject for sharing evaluations
+- [ ] support composition api
+- [ ] docs
+
 ## Project setup
 ```
 yarn install
