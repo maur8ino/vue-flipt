@@ -100,34 +100,22 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _FliptProvider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("6ce4");
-
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: "Flipt",
   props: {
     entityId: {
       type: String,
-      default: function _default() {
-        return this.fliptEntityId;
-      }
+      required: true
     },
     flagKey: {
       type: String,
-      default: function _default() {
-        return this.fliptFlagKey;
-      }
+      required: true
     },
     context: {
-      type: Object,
-      default: function _default() {
-        return this.fliptContext;
-      }
+      type: Object
     },
     baseURL: {
-      type: String,
-      default: function _default() {
-        return this.fliptBaseURL;
-      }
+      type: String
     }
   },
   data: function data() {
@@ -137,12 +125,6 @@ return /******/ (function(modules) { // webpackBootstrap
       match: null,
       value: null
     };
-  },
-  inject: {
-    fliptEntityId: _FliptProvider__WEBPACK_IMPORTED_MODULE_0__[/* fliptEntityId */ "d"],
-    fliptFlagKey: _FliptProvider__WEBPACK_IMPORTED_MODULE_0__[/* fliptFlagKey */ "e"],
-    fliptContext: _FliptProvider__WEBPACK_IMPORTED_MODULE_0__[/* fliptContext */ "c"],
-    fliptBaseURL: _FliptProvider__WEBPACK_IMPORTED_MODULE_0__[/* fliptBaseURL */ "b"]
   },
   methods: {
     getDollarFlipt: function getDollarFlipt() {
@@ -214,10 +196,10 @@ module.exports = function(module) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return fliptEntityId; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return fliptFlagKey; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return fliptContext; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return fliptBaseURL; });
+/* unused harmony export fliptEntityId */
+/* unused harmony export fliptFlagKey */
+/* unused harmony export fliptContext */
+/* unused harmony export fliptBaseURL */
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var fliptEntityId = Symbol("fliptEntityId");
