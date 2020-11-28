@@ -1,5 +1,5 @@
 export default {
-  name: "Flipt",
+  name: "FliptEvaluate",
 
   props: {
     entityId: {

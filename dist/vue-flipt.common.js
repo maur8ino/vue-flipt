@@ -87,73 +87,6 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
-/***/ "2cec":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({
-  name: "Flipt",
-  props: {
-    entityId: {
-      type: String,
-      required: true
-    },
-    flagKey: {
-      type: String,
-      required: true
-    },
-    context: {
-      type: Object
-    },
-    baseURL: {
-      type: String
-    }
-  },
-  data: function data() {
-    return {
-      error: null,
-      loading: false,
-      match: null,
-      value: null
-    };
-  },
-  methods: {
-    getDollarFlipt: function getDollarFlipt() {
-      return this.$flipt;
-    }
-  },
-  created: function created() {
-    var _this = this;
-
-    this.loading = true;
-    this.$flipt.evaluate(this.entityId, this.flagKey, this.context, this.baseURL).then(function (response) {
-      _this.match = response.match;
-      _this.value = response.value;
-    }).catch(function (error) {
-      _this.error = true;
-
-      _this.$emit("error", error);
-    }).finally(function () {
-      _this.loading = false;
-
-      _this.$emit("loaded", {
-        match: _this.match,
-        value: _this.value
-      });
-    });
-  },
-  render: function render() {
-    return this.$scopedSlots.default({
-      error: this.error,
-      loading: this.loading,
-      match: this.match,
-      value: this.value
-    });
-  }
-});
-
-/***/ }),
-
 /***/ "62e4":
 /***/ (function(module, exports) {
 
@@ -180,50 +113,6 @@ module.exports = function(module) {
 	return module;
 };
 
-
-/***/ }),
-
-/***/ "6ce4":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export fliptEntityId */
-/* unused harmony export fliptFlagKey */
-/* unused harmony export fliptContext */
-/* unused harmony export fliptBaseURL */
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var fliptEntityId = Symbol("fliptEntityId");
-var fliptFlagKey = Symbol("fliptFlagKey");
-var fliptContext = Symbol("fliptContext");
-var fliptBaseURL = Symbol("fliptBaseURL");
-/* harmony default export */ __webpack_exports__["a"] = ({
-  name: "FliptProvider",
-  props: {
-    entityId: {
-      type: String,
-      required: true
-    },
-    flagKey: {
-      type: String,
-      required: true
-    },
-    context: {
-      type: Object
-    },
-    baseURL: {
-      type: String
-    }
-  },
-  provide: function provide() {
-    var _ref;
-
-    return _ref = {}, _defineProperty(_ref, fliptEntityId, this.entityId), _defineProperty(_ref, fliptFlagKey, this.flagKey), _defineProperty(_ref, fliptContext, this.context), _defineProperty(_ref, fliptBaseURL, this.baseURL), _ref;
-  },
-  render: function render() {
-    return this.$scopedSlots.default();
-  }
-});
 
 /***/ }),
 
@@ -448,6 +337,73 @@ var dollar_flipt_DollarFlipt = /*#__PURE__*/function () {
 
   return DollarFlipt;
 }();
+
+/***/ }),
+
+/***/ "8379":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+  name: "FliptEvaluate",
+  props: {
+    entityId: {
+      type: String,
+      required: true
+    },
+    flagKey: {
+      type: String,
+      required: true
+    },
+    context: {
+      type: Object
+    },
+    baseURL: {
+      type: String
+    }
+  },
+  data: function data() {
+    return {
+      error: null,
+      loading: false,
+      match: null,
+      value: null
+    };
+  },
+  methods: {
+    getDollarFlipt: function getDollarFlipt() {
+      return this.$flipt;
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    this.loading = true;
+    this.$flipt.evaluate(this.entityId, this.flagKey, this.context, this.baseURL).then(function (response) {
+      _this.match = response.match;
+      _this.value = response.value;
+    }).catch(function (error) {
+      _this.error = true;
+
+      _this.$emit("error", error);
+    }).finally(function () {
+      _this.loading = false;
+
+      _this.$emit("loaded", {
+        match: _this.match,
+        value: _this.value
+      });
+    });
+  },
+  render: function render() {
+    return this.$scopedSlots.default({
+      error: this.error,
+      loading: this.loading,
+      match: this.match,
+      value: this.value
+    });
+  }
+});
 
 /***/ }),
 
@@ -1316,7 +1272,7 @@ module.exports = require("axios");
 __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
-__webpack_require__.d(__webpack_exports__, "Flipt", function() { return /* reexport */ src_plugin["a" /* Flipt */]; });
+__webpack_require__.d(__webpack_exports__, "FliptEvaluate", function() { return /* reexport */ src_plugin["a" /* FliptEvaluate */]; });
 
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/setPublicPath.js
 // This file is imported into lib/wc client bundles.
@@ -1358,11 +1314,9 @@ var src_plugin = __webpack_require__("fe83");
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Flipt; });
-/* harmony import */ var _components_Flipt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("2cec");
-/* harmony import */ var _components_FliptProvider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("6ce4");
-/* harmony import */ var _dollar_flipt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("7f05");
-
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FliptEvaluate; });
+/* harmony import */ var _components_FliptEvaluate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("8379");
+/* harmony import */ var _dollar_flipt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("7f05");
 
  // Declare install function executed by Vue.use()
 
@@ -1372,16 +1326,14 @@ function install(Vue, options) {
   }
 
   install.installed = true;
-  Vue.component("flipt", _components_Flipt__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]);
-  Vue.component("Flipt", _components_Flipt__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]);
-  Vue.component("flipt-provider", _components_FliptProvider__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
-  Vue.component("FliptProvider", _components_FliptProvider__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]); // Lazy creation
+  Vue.component("flipt-evaluate", _components_FliptEvaluate__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]);
+  Vue.component("FliptEvaluate", _components_FliptEvaluate__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]); // Lazy creation
 
   if (!Object.prototype.hasOwnProperty.call(Vue, "$flipt")) {
     Object.defineProperty(Vue.prototype, "$flipt", {
       get: function get() {
         if (!this.$_flipt) {
-          this.$_flipt = new _dollar_flipt__WEBPACK_IMPORTED_MODULE_2__[/* DollarFlipt */ "a"](options);
+          this.$_flipt = new _dollar_flipt__WEBPACK_IMPORTED_MODULE_1__[/* DollarFlipt */ "a"](options);
         }
 
         return this.$_flipt;
@@ -1408,7 +1360,7 @@ if (GlobalVue) {
   GlobalVue.use(plugin);
 }
 
-var Flipt = _components_Flipt__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"];
+var FliptEvaluate = _components_FliptEvaluate__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"];
 /* harmony default export */ __webpack_exports__["b"] = (plugin);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("c8ba")))
 

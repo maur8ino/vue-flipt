@@ -1,9 +1,9 @@
 import { shallowMount } from "@vue/test-utils";
-import Flipt from "@/components/Flipt";
+import FliptEvaluate from "@/components/FliptEvaluate";
 
-describe("Flipt", () => {
+describe("FliptEvaluate", () => {
   const mountWrapper = $flipt =>
-    shallowMount(Flipt, {
+    shallowMount(FliptEvaluate, {
       mocks: { $flipt },
       propsData: {
         entityId: "entity-1",

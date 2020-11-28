@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
-    <Flipt entity-id="entity-1" flag-key="test-flag-2">
+    <FliptEvaluate entity-id="entity-1" flag-key="test-flag-2">
       <template #default="{ error, loading, match, value }">
         <div>
           <ul>
@@ -13,8 +13,8 @@
           <h3 v-if="!loading && !error">Loaded!</h3>
         </div>
       </template>
-    </Flipt>
-    <Flipt entity-id="entity-1" flag-key="test-flag-2">
+    </FliptEvaluate>
+    <FliptEvaluate entity-id="entity-1" flag-key="test-flag-2">
       <template #default="{ error, loading, match, value }">
         <div>
           <ul>
@@ -26,16 +26,16 @@
           <h3 v-if="!loading && !error">2Loaded!</h3>
         </div>
       </template>
-    </Flipt>
+    </FliptEvaluate>
   </div>
 </template>
 
 <script>
-import Flipt from "@/components/Flipt";
+import FliptEvaluate from "@/components/FliptEvaluate";
 
 export default {
   name: "App",
-  components: { Flipt },
+  components: { FliptEvaluate },
 };
 </script>
 
