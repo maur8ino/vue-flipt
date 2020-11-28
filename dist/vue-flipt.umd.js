@@ -1354,7 +1354,7 @@ function install(Vue, options) {
 
 var plugin = {
   install: install,
-  version: "0.1.0"
+  version: "0.2.1"
 }; // Auto-install when vue is found (eg. in browser via <script> tag)
 
 var GlobalVue = null;
